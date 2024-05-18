@@ -12,4 +12,3 @@ RUN apt-get update && \
 
 RUN poetry config virtualenvs.in-project false && poetry env use python
 RUN poetry install --no-root
-

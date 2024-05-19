@@ -116,3 +116,12 @@ Your implementation will also be evaluated against the following criteria:
 
 > This exercise should not take too long, so don't feel the need to add extra features.
 > Good luck!👍
+
+For the Database Schema: View `school_database_schema.jpg`
+
+To run test:
+After start the docker container, run the command
+> docker exec -it <container-name> poetry run python manage.py test
+
+To view API docs: Please visit the endpoint
+> {{host}}/redoc

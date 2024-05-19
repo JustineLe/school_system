@@ -4,6 +4,7 @@ sleep 10
 
 set -e
 
+poetry run python manage.py makemigrations
 poetry run python manage.py migrate --noinput
 
 server_env=$1

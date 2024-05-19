@@ -5,11 +5,13 @@ from core.models import School, Teacher, Student, Administrator, Course
 class ExtensionAPITestCase(APITestCase):
     def setUp(self):
         self.school = School.objects.create(name="Test School")
+        self.second_school = School.objects.create(name="Second School")
 
         self.admin = Administrator.objects.create(name="Test Admin", school=self.school)
 
         self.teacher_1 = Teacher.objects.create(name="Teacher 1", school=self.school)
         self.teacher_2 = Teacher.objects.create(name="Teacher 2", school=self.school)
+        self.teacher_3 = Teacher.objects.create(name="Teacher 3", school=self.second_school)
 
         self.student_1 = Student.objects.create(name="Student 1", school=self.school)
         self.student_2 = Student.objects.create(name="Student 2", school=self.school)
@@ -19,6 +21,7 @@ class ExtensionAPITestCase(APITestCase):
         self.course_1.student.add(self.student_1, self.student_2)
         self.course_2 = Course.objects.create(name="Django", teacher=self.teacher_2, school=self.school)
         self.course_2.student.add(self.student_2, self.student_3)
+        self.course_3 = Course.objects.create(name="Flask", teacher=self.teacher_3, school=self.second_school)
 
         self.transfer_url = reverse("class-movement")
 
@@ -87,3 +90,12 @@ class ExtensionAPITestCase(APITestCase):
         response = self.client.post(self.transfer_url, data, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.course_1.student.count() + 1, self.course_2.student.count() - 1)
+
+    def test_student_cannot_enroll_course_from_different_school(self):
+        data = {
+            "studentId": self.student_1.id,
+            "fromCourseId": self.course_1.id,
+            "toCourseId": self.course_3.id
+        }
+        response = self.client.post(self.transfer_url, data, format="json")
+        self.assertEqual(response.status_code, 400)

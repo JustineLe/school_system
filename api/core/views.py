@@ -29,6 +29,28 @@ class SchoolViewSet(viewsets.ModelViewSet):
     queryset = School.objects.all()
     serializer_class = SchoolSerializer
 
+    def destroy(self, request, pk, format=None):
+        school = get_object_or_404(self.queryset, pk=pk)
+
+        payload = {
+            "admin": school.school_administrator.all(),
+            "teacher": school.school_teacher.all(),
+            "student": school.school_student.all(),
+            "course": school.school_course.all(),
+        }
+        for model, filter_value in payload.items():
+            if filter_value:
+                return Response(
+                    {"message": f"Could not delete School cause of {model.capitalize()}'s existing"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+        school.delete()
+        return Response(
+            {"message": f"Delete School succesfully"},
+            status=status.HTTP_204_NO_CONTENT
+        )
+
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
@@ -102,6 +124,12 @@ class ClassMovementView(APIView):
             if transfer_student in to_course.student.all():
                 return Response(
                     {"message": "`student` is already existed in `to_course`"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            if transfer_student.school != to_course.school:
+                return Response(
+                    {"message": f"Student from school {transfer_student.school} cannot enroll course from {to_course.school}"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 

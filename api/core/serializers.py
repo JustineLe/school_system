@@ -14,47 +14,64 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ["id", "name", "school"]
 
+    def validate(self, attrs):
+        try:
+            course_belong_to_student = self.instance.course_student.all().first()
+        except AttributeError:
+            course_belong_to_student = None
+
+        if course_belong_to_student:
+            course_school_id = course_belong_to_student.school.id
+            course_school_name = course_belong_to_student.school.name
+        if course_belong_to_student and (course_school_id != attrs['school']):
+            raise serializers.ValidationError(
+                f"Student {self.instance.name} is in a course belong to school {course_school_name}"
+                )
+
+        return attrs
+
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
         fields = ["id", "name", "school"]
 
+    def validate(self, attrs):
+        try:
+            course_belong_to_teacher = self.instance.course_teacher.all().first()
+        except AttributeError:
+            course_belong_to_teacher = None
+
+        if course_belong_to_teacher:
+            course_school_id = course_belong_to_teacher.school.id
+            course_school_name = course_belong_to_teacher.school.name
+        if course_belong_to_teacher and (course_school_id != attrs['school']):
+            raise serializers.ValidationError(
+                f"Teacher {self.instance.name} is in a course belong to school {course_school_name}"
+                )
+
+        return attrs
+
 
 class CourseSerializer(serializers.ModelSerializer):
-    teacher = TeacherSerializer()
-    student = StudentSerializer(many=True)
+    student = serializers.PrimaryKeyRelatedField(many=True, queryset=Student.objects.all())
 
     class Meta:
         model = Course
         fields = ["id", "name", "location", "school", "teacher", "student"]
 
     def validate(self, attrs):
-        """
-            Validate if student and teacher are in the same school
-        """
-        teacher_name = attrs.get('teacher')['name']
-        student_ids = attrs.get('student')
+        students = attrs["student"]
+        school = attrs["school"]
+        teacher = attrs["teacher"]
 
-        teacher_data = Teacher.objects.filter(name=teacher_name).first()
+        if teacher and (teacher.school.id != school.id):
+            raise serializers.ValidationError("Teacher's school is not the same")
+        for ind, student in enumerate(students):
+            if student.school.id != school.id:
+                raise serializers.ValidationError(f"index-{ind} student's school is not the same")
 
-        if not teacher_data:
-            raise serializers.ValidationError(f"Not found the teacher with ID {teacher_name}")
-
-        student_count = Student.objects.filter(pk__in=student_ids).count()
-
-        if student_count != len(student_ids):
-            raise serializers.ValidationError("One of the input student is invalid!")
-
-        student_school_data = Student.objects.filter(pk__in=student_ids).values_list('school', flat=True)
-        
-        if set(student_school_data) != teacher_data.school:
-            raise serializers.ValidationError("Input teacher and student are not in the same school")
-    
-    def create(self, validated_data):
-        new_course = Course.objects.create(
-            
-        )
+        return attrs
 
 
 class SchoolSerializer(serializers.ModelSerializer):

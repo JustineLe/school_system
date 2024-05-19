@@ -1,0 +1,660 @@
+{
+	"info": {
+		"_postman_id": "19a888b6-7677-408f-a3cd-09a6c05d9821",
+		"name": "SchoolCourse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18166934"
+	},
+	"item": [
+		{
+			"name": "School_CRUD",
+			"item": [
+				{
+					"name": "get_list_school",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/schools",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"schools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_school_detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/schools/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"schools",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_school",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"school1\",\r\n    \"address\": \"location1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/schools",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"schools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_school",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"school1\",\r\n    \"address\": \"location1\",\r\n    \"school_course\": [],\r\n    \"school_teacher\": [],\r\n    \"school_student\": [],\r\n    \"school_administrator\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/schools/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"schools",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_school",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/schools/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"schools",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course_CRUD",
+			"item": [
+				{
+					"name": "get_list_course",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/course",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_course_detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/course/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"course",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_course",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"course1\",\r\n    \"location\": \"room1\",\r\n    \"school\": 2,\r\n    \"teacher\": null,\r\n    \"student\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/course",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_course",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"course1_updated\",\r\n    \"location\": \"room1\",\r\n    \"school\": 2,\r\n    \"teacher\": null,\r\n    \"student\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/course/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"course",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_course",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/course/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"course",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin_CRUD",
+			"item": [
+				{
+					"name": "get_list_admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/administrator",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"administrator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_admin_detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/administrator/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"admin1\",\r\n    \"school\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/administrator",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"administrator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"updated admin\",\r\n    \"school\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/administrator/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/administrator/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student_CRUD",
+			"item": [
+				{
+					"name": "get_list_student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/student",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_student_detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/student/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"student",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"student1\",\r\n    \"school\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/student",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_student",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"updated student\",\r\n    \"school\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/student/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"student",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_student",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/student/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"student",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teacher_CRUD",
+			"item": [
+				{
+					"name": "get_list_teacher",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/teacher",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"teacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_teacher_detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/teacher/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"teacher",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_teacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"teacher1\",\r\n    \"school\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/teacher",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"teacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_teacher",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"updated teacher\",\r\n    \"school\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{django_default_host}}/api/teacher/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"teacher",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_teacher",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{django_default_host}}/api/teacher/1",
+							"host": [
+								"{{django_default_host}}"
+							],
+							"path": [
+								"api",
+								"teacher",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transfer_student_in_course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "studentId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "fromCourseId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "toCourseId",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{django_default_host}}/api/transfer",
+					"host": [
+						"{{django_default_host}}"
+					],
+					"path": [
+						"api",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_school_stat",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{django_default_host}}/api/school/2/stat",
+					"host": [
+						"{{django_default_host}}"
+					],
+					"path": [
+						"api",
+						"school",
+						"2",
+						"stat"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

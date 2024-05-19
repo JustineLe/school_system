@@ -6,9 +6,6 @@ from .school import School
 
 
 class Course(models.Model):
-    class Meta:
-        unique_together = ('name', 'school')
-
     name = models.CharField(max_length=128, blank=False, null=False)
     location = models.CharField(max_length=128, blank=False, null=False)
     teacher = models.ForeignKey(to=Teacher, on_delete=models.SET_NULL, null=True, related_name="course_teacher")
